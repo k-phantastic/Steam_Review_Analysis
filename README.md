@@ -21,7 +21,7 @@ Initial data from Kaggle includes statistics about the review and reviewer inclu
 General statistics obtained to see popularity of games such as total playtime of reviewers and total number of reviews
 
 ##### Figure 1
-![Figure 1](/resources/screenshots/top10gamesReviewStatistics_SAMPLEDDATA.png)
+![Figure 1](/resources/screenshots/top10gamesReviewStatistics_ALLDATA.png)
 
 ##### Figure 2
 ![Figure 2](/resources/screenshots/boxplot.png)
