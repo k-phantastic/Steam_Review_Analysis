@@ -59,6 +59,7 @@ The goal of this project was to build a regression model to predict the helpfuln
 
 #### Methods
 The dataset included a pre-processed DataFrame (df_cleaned) with various attributes related to:
+
 * Reviewer behavior (e.g., number of games owned, playtime stats)
 * Engagement metrics (e.g., votes, funny votes, comment count)
 * Review context (e.g., whether the review was written during early access)
