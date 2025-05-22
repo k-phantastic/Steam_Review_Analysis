@@ -97,6 +97,7 @@ Testing RMSE values: [0.0677858225116503, 0.06795994752549109, 0.067858596803974
 
 ##### Figure 1
 ![Figure 1](/resources/screenshots/train_vs_test_RMSE.png)
+
 As can be seen by the graph abpve, train and test error are similar accross all the train/test splits. This indicates that the model is neither overfitting or underfitting.
 
 #### Next models 
