@@ -93,7 +93,9 @@ In order to accurately assess model performance, we tested on various train/test
 Ground truth: weighted_vote_score
 #### Results 
 Train error Vs Test error accross train/test splits:
+
 Training RMSE values: [0.06780513676116458, 0.06809054266893783, 0.06793147050810851, 0.06786924970348243, 0.06783383929472699]
+
 Testing RMSE values: [0.0677858225116503, 0.06795994752549109, 0.06785859680397434, 0.06774141874455455, 0.06766356133129071]
 
 ##### Figure 1
