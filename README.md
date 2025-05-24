@@ -46,12 +46,12 @@ General statistics obtained to see popularity of games such as total playtime of
 
 # Steam Review Analysis: Milestone 3
 
-## Pre Processing 
-All major preprocessing was completed in milestone 1.
-* Filtered by weighted vote score between 0-1
-* Dropped columns that are for sure not to be used: hidden_in_steam_china, steam_china_location, review
-* Converted playtime statistics to floats and converted from minutes played to hours played (to align with Steam current interface)
-* Dropped any potential duplicates in the sampling of the data
+## Preprocessing 
+All major preprocessing was completed in milestone 2.
+* Filtered by weighted vote score between 0 and 1.
+* Dropped columns that are for sure not to be used: hidden_in_steam_china, steam_china_location, review.
+* Converted playtime statistics to floats and converted from minutes played to hours played (to align with Steam’s current interface).
+* Dropped any potential duplicates in the sampling of the data.
 
 ## Model 1 Overview: Helpfulness Score Regression
 #### Objective: 
@@ -88,7 +88,7 @@ We used the Spark ML pipeline to streamline preprocessing and model training:
 * StandardScaler: Standardized features to zero mean and unit variance to improve gradient descent convergence.
 * LinearRegression: Used as an interpretable baseline model.
 
-In order to accurately assess model performance, we tested on various train/test splits with the train values set to: [0.1, 0.2, 0.5, 0.8, 0.9] The model was evaluated using Root Mean Squared Error (RMSE).
+In order to accurately assess model performance, we tested on various train/test splits with the train values set to: [0.1, 0.2, 0.5, 0.8, 0.9]. The model was evaluated using Root Mean Squared Error (RMSE).
 
 Ground truth: weighted_vote_score
 ##### Figure 1
@@ -96,7 +96,7 @@ Ground truth: weighted_vote_score
 The above figure depicts the first 100 values of the ground truth with its corresponding index. 
 
 #### Results 
-Train error Vs Test error accross train/test splits:
+Train error Vs Test error across train/test splits:
 
 Training RMSE values: [0.06780513676116458, 0.06809054266893783, 0.06793147050810851, 0.06786924970348243, 0.06783383929472699]
 
@@ -105,17 +105,17 @@ Testing RMSE values: [0.0677858225116503, 0.06795994752549109, 0.067858596803974
 ##### Figure 2
 ![Figure 2](/resources/screenshots/train_vs_test_RMSE.png)
 
-As can be seen by the graph abpve, train and test error are similar accross all the train/test splits. This seems to indicate that the model is neither overfitting or underfitting.
+As can be seen by the graph above, train and test error are similar across all the train/test splits. This seems to indicate that the model is neither overfitting nor underfitting.
 
 ##### Figure 3
 ![Figure 3](/resources/screenshots/pred_overlay.png)
 
-However, the figure above, an overlay of the first 100 ground truths and the first 100 predictions of the 80/20 train test split show that the model is actually underfitting and needs tuning in order to properly and accuractely predict the weighted_vote_score.
+However, the figure above, an overlay of the first 100 ground truths and the first 100 predictions of the 80/20 train-test split, shows that the model is actually underfitting and needs tuning in order to properly and accurately predict the weighted_vote_score.
 
 #### Model improvements
-* Reducing refularization may assist in preserving the real signal in our chosen features to survive.
-* Incorperating additional features such as text based sentiment analysis
-* Utilizing cross validation so the real signal in our chosen features survive.
+* Reducing regularization may assist in preserving the real signal in our chosen features to survive.
+* Incorporating additional features such as text-based sentiment analysis.
+* Utilizing cross-validation so the real signal in our chosen features survives.
 
 #### Next models 
 Currently, we are considering using Gradient Boosted Trees (GBTRegressor) and PCA with K-Means Clustering.
@@ -127,7 +127,7 @@ PCA + K-Means is an unsupervised approach to uncover patterns in reviewer behavi
 Both models aid in our goal in this project of identifying potential contributions to algorithms that highlight relevant, personalized user recommendations or improve developer pricing.
 
 #### Conclusion
-The linear regression model achieved consistent performance across multiple runs, with training RMSE values averaging around 0.0679 and testing RMSE values averaging around 0.0678. This seemed to indicate that the model is not overfitting and generalizes well to unseen data within the current feature set. However, upon further analysis it can be seen that the model is predicting extremely close to the average for every value and managed to achieve a low RMSE through underfitting. Although the model performed reasonably well, it is clear that the underfitting must be addressed in order to build an accurate and useful model that suits our purposes. Ways to improve its performance include, incorperating additional features such as text based sentiment analysis, tuneing hyperparameters by exploring methods such as cross validation, and applying target transformations such as log scale. 
+The linear regression model achieved consistent performance across multiple runs, with training RMSE values averaging around 0.0679 and testing RMSE values averaging around 0.0678. This seemed to indicate that the model is not overfitting and generalizes well to unseen data within the current feature set. However, upon further analysis, it can be seen that the model is predicting extremely close to the average for every value and managed to achieve a low RMSE through underfitting. Although the model performed reasonably well, it is clear that the underfitting must be addressed in order to build an accurate and useful model that suits our purposes. Ways to improve its performance include incorporating additional features such as text-based sentiment analysis, tuning hyperparameters by exploring methods such as cross-validation, and applying target transformations such as log scale. 
 
 ## Team Members
 * Danny Xia ([@dannyxia7](https://github.com/dannyxia7))
