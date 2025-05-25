@@ -54,10 +54,24 @@ All major preprocessing was completed in milestone 2.
 * Dropped any potential duplicates in the sampling of the data.
 
 ## Model 1 Overview: Helpfulness Score Regression
+
+#### Links
+Model 1 notebook: https://github.com/khp023/Steam_Review_Analysis/blob/146e791f295ecb6bcd4e096fb01a17f517e95f83/MS3_Model_1.ipynb
+Milestone 2 notebook: https://github.com/khp023/Steam_Review_Analysis/blob/146e791f295ecb6bcd4e096fb01a17f517e95f83/232_subset.ipynb (includes how data was derived)
+Drive link to dataset: https://drive.google.com/file/d/12S7orw3WFnilznJpWCwaLdhBPNwHmMcu/view?usp=sharing (too large to store in github)
+
+#### Setup
+Singularity Image File Location: ~/esolares/spark_py_latest_jupyter_dsc232r.sif
+Environment Modules to be loaded: singularitypro
+Cores: 30
+Memory per node: 80
+Working directory: home
+Type: JupyterLab
+
 #### Objective: 
 The goal of this project was to build a regression model to predict the helpfulness score (represented by the weighted_vote_score) of Steam reviews using various numeric features derived from the review metadata and the reviewer’s profile.
 
-#### Methods
+### Methods
 The dataset included a pre-processed DataFrame (df_cleaned) with various attributes related to:
 
 * Reviewer behavior (e.g., number of games owned, playtime stats)
@@ -91,6 +105,9 @@ We used the Spark ML pipeline to streamline preprocessing and model training:
 In order to accurately assess model performance, we tested on various train/test splits with the train values set to: [0.1, 0.2, 0.5, 0.8, 0.9]. The model was evaluated using Root Mean Squared Error (RMSE).
 
 Ground truth: weighted_vote_score
+
+### Results
+
 ##### Figure 1
 ![Figure 1](/resources/screenshots/ground_truth.png)
 The above figure depicts the first 100 values of the ground truth with its corresponding index. 
@@ -126,7 +143,7 @@ PCA + K-Means is an unsupervised approach to uncover patterns in reviewer behavi
 
 Both models aid in our goal in this project of identifying potential contributions to algorithms that highlight relevant, personalized user recommendations or improve developer pricing.
 
-#### Conclusion
+### Conclusion
 The linear regression model achieved consistent performance across multiple runs, with training RMSE values averaging around 0.0679 and testing RMSE values averaging around 0.0678. This seemed to indicate that the model is not overfitting and generalizes well to unseen data within the current feature set. However, upon further analysis, it can be seen that the model is predicting extremely close to the average for every value and managed to achieve a low RMSE through underfitting. Although the model performed reasonably well, it is clear that the underfitting must be addressed in order to build an accurate and useful model that suits our purposes. Ways to improve its performance include incorporating additional features such as text-based sentiment analysis, tuning hyperparameters by exploring methods such as cross-validation, and applying target transformations such as log scale. 
 
 ## Team Members
