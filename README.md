@@ -106,13 +106,11 @@ In order to accurately assess model performance, we tested on various train/test
 
 Ground truth: weighted_vote_score
 
-### Results
-
 ##### Figure 1
 ![Figure 1](/resources/screenshots/ground_truth.png)
 The above figure depicts the first 100 values of the ground truth with its corresponding index. 
 
-#### Results 
+### Results 
 Train error Vs Test error across train/test splits:
 
 Training RMSE values: [0.06780513676116458, 0.06809054266893783, 0.06793147050810851, 0.06786924970348243, 0.06783383929472699]
