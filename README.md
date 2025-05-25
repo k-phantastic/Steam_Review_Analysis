@@ -56,9 +56,9 @@ All major preprocessing was completed in milestone 2.
 ## Model 1 Overview: Helpfulness Score Regression
 
 #### Links
-Model 1 notebook: https://github.com/khp023/Steam_Review_Analysis/blob/146e791f295ecb6bcd4e096fb01a17f517e95f83/MS3_Model_1.ipynb
-Milestone 2 notebook: https://github.com/khp023/Steam_Review_Analysis/blob/146e791f295ecb6bcd4e096fb01a17f517e95f83/232_subset.ipynb (includes how data was derived)
-Drive link to dataset: https://drive.google.com/file/d/12S7orw3WFnilznJpWCwaLdhBPNwHmMcu/view?usp=sharing (too large to store in github)
+* Model 1 notebook: https://github.com/khp023/Steam_Review_Analysis/blob/146e791f295ecb6bcd4e096fb01a17f517e95f83/MS3_Model_1.ipynb
+* Milestone 2 notebook: https://github.com/khp023/Steam_Review_Analysis/blob/146e791f295ecb6bcd4e096fb01a17f517e95f83/232_subset.ipynb (includes how data was derived)
+* Drive link to dataset: https://drive.google.com/file/d/12S7orw3WFnilznJpWCwaLdhBPNwHmMcu/view?usp=sharing (too large to store in github)
 
 #### Setup
 Singularity Image File Location: ~/esolares/spark_py_latest_jupyter_dsc232r.sif
