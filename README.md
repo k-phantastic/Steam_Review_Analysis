@@ -19,7 +19,7 @@ With the prerequisite usage of SDSC Expanse the following were key parameters ou
 * Working directory: home
 * Type: JupyterLab
 
-Provided in [232_subset.ipynb](232_subset.ipynb) is a cell in which `pip install -r requirements.txt` can be performed to install necessary packages 
+Provided in [232_subset.ipynb](232_subset.ipynb) is a cell in which `pip install -r requirements.txt` can be performed to install necessary packages. Additionally, due to favorable runtimes in the pre-processing, slurm scheduling was not needed. 
 
 > Source of the data is located here: [100 Million+ Steam Reviews | Kaggle](https://www.kaggle.com/datasets/kieranpoc/steam-reviews/data)
 
