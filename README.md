@@ -2,77 +2,67 @@
 
 ## Overview
 
-In this project we will examine a dataset containing more than 100 million Steam reviews and attempt to create two machine learning models: one to predict the helpfulness of user reviews, and the other to create distinct clusters of Steam reviewers. Data will be processed and stored on a cluster on San Diego Computer Center (SDSC) with primary usage of Spark through PySpark. 
+In this project we will examine a dataset containing more than 100 million Steam reviews and attempt to create two machine learning models: one to predict the helpfulness of user reviews, and the other to create distinct clusters of Steam reviewers. 
+
+Data will be processed and stored on the San Diego Computer Center (SDSC) and their Expanse system with primary usage of Spark through PySpark. 
 
 Initial data from Kaggle includes statistics about the review and reviewer including their playtime, number of games owned, and number of positive ratings that the review got. Steam also provides a parameter described as a "weighted vote score" of how useful a review is. 
 
-## Methods
+Summary of the column labels and features can be found in [DATA_LABELS.md](/resources/DATA_LABELS.md)
 
-#### Preprocessing
-* Performed initial cleanup by filtering out weighted vote scores of 0 to capture removal of reviews that are not useful, are from bots, or are potentially spam. Parameter can be tweaked further as needed for machine learning methods
-* Re-established dataframe schema and dropped null values for corrupted rows
-* Filtered by weighted vote score between 0-1
+## Setup
+With the prerequisite usage of SDSC Expanse the following were key parameters outside of performance ([reference class setup](https://github.com/ucsd-dsc232r/group-project)): 
+* Singularity Image File Location (course's singularity image): `~/esolares/spark_py_latest_jupyter_dsc232r.sif` 
+* Environment Modules to be loaded: `singularitypro`
+* Cores: 30
+* Memory per node (gb): 80 
+* Working directory: home
+* Type: JupyterLab
+
+Provided in [232_subset.ipynb](232_subset.ipynb) is a cell in which `pip install -r requirements.txt` can be performed to install necessary packages 
+
+> Source of the data is located here: [100 Million+ Steam Reviews | Kaggle](https://www.kaggle.com/datasets/kieranpoc/steam-reviews/data)
+
+## Preprocessing (Milestone 2) 
+> Key Files: [232_subset.ipynb](232_subset.ipynb) was used to process initial data
+* Performed initial cleanup by filtering out weighted vote scores of 0 to capture removal of reviews that are not useful, are from bots, or are potentially spam. Parameter can be filtered further as needed for machine learning methods
+* Re-established dataframe schema and dropped null values for corrupted rows (comma handling errors)
+* Filtered by weighted vote score between 0-1 as additional means of removing errant data
 * Dropped columns that are for sure not to be used: hidden_in_steam_china, steam_china_location, review
 * Converted playtime statistics to floats and converted from minutes played to hours played (to align with Steam current interface)
 * Dropped any potential duplicates in the sampling of the data
 
-#### Visualizations
+## Initial Visualizations
+>Key Files: [DSC232R_group_proj_vis.ipynb](DSC232R_group_proj_vis.ipynb) and [playtime_visualizations.ipynb](playtime_visualizations.ipynb) used to generate visualizations, with the former used on a sample of the data
 
-General statistics obtained to see popularity of games such as total playtime of reviewers and total number of reviews
+General statistics and visualizations shown from clean data, used to brainstorm future ML models and processing
 
-##### Figure 1
+##### Figure 1: Which games have the most reviews or most passionate reviewers (as seen in total hours)
 ![Figure 1](/resources/screenshots/top10gamesReviewStatistics_ALLDATA.png)
 
-##### Figure 2
+##### Figure 2 (sampled data): Weighted Vote Score vs Review Vote (1 being upvote) 
 ![Figure 2](/resources/screenshots/boxplot.png)
 
-##### Figure 3
+##### Figure 3 (sampled data): Heatmap of a features hypothesized to be useful for ML
 ![Figure 3](/resources/screenshots/heatmap.png)
 
-##### Figure 4
+##### Figure 4 (sampled data): Histogram of Weighted Vote Score (pre-filtered score of >0.8)
 ![Figure 4](/resources/screenshots/histogram.png)
 
-##### Figure 5
+##### Figure 5 (sampled data): Scatterplot of Author Playtime (at time of review) vs Weighted Vote Score, with weak correlation 
 ![Figure 5](/resources/screenshots/scatter.png)
 
+---
 
-## Team Members
-* Danny Xia ([@dannyxia7](https://github.com/dannyxia7))
-* Khanh Phan ([@khp023](https://github.com/khp023))
-* Layth Marabeh ([@lmarabeh](https://github.com/lmarabeh))
+## Model 1 Overview: Helpfulness Score Regression (Milestone 3)
 
-## Sources
-* [100 Million+ Steam Reviews | Kaggle](https://www.kaggle.com/datasets/kieranpoc/steam-reviews/data)
+> Key Files: [Model 1 Notebook](MS3_Model_1.ipynb), used in conjunction with the [cleaned data set](https://drive.google.com/file/d/12S7orw3WFnilznJpWCwaLdhBPNwHmMcu/view?usp=sharing) (obtained following initial [cleanup](232_subset.ipynb))
 
-# Steam Review Analysis: Milestone 3
-
-## Preprocessing 
-All major preprocessing was completed in milestone 2.
-* Filtered by weighted vote score between 0 and 1.
-* Dropped columns that are for sure not to be used: hidden_in_steam_china, steam_china_location, review.
-* Converted playtime statistics to floats and converted from minutes played to hours played (to align with Steam’s current interface).
-* Dropped any potential duplicates in the sampling of the data.
-
-## Model 1 Overview: Helpfulness Score Regression
-
-#### Links
-* Model 1 notebook: https://github.com/khp023/Steam_Review_Analysis/blob/146e791f295ecb6bcd4e096fb01a17f517e95f83/MS3_Model_1.ipynb
-* Milestone 2 notebook: https://github.com/khp023/Steam_Review_Analysis/blob/146e791f295ecb6bcd4e096fb01a17f517e95f83/232_subset.ipynb (includes how data was derived)
-* Drive link to dataset: https://drive.google.com/file/d/12S7orw3WFnilznJpWCwaLdhBPNwHmMcu/view?usp=sharing (too large to store in github)
-
-#### Setup
-Singularity Image File Location: ~/esolares/spark_py_latest_jupyter_dsc232r.sif
-Environment Modules to be loaded: singularitypro
-Cores: 30
-Memory per node: 80
-Working directory: home
-Type: JupyterLab
-
-#### Objective: 
-The goal of this project was to build a regression model to predict the helpfulness score (represented by the weighted_vote_score) of Steam reviews using various numeric features derived from the review metadata and the reviewer’s profile.
+### Objective: 
+The goal of this model is to build a regression model to predict the helpfulness score (represented by the weighted_vote_score) of Steam reviews using various numeric features derived from the review metadata and the reviewer’s profile.
 
 ### Methods
-The dataset included a pre-processed DataFrame (df_cleaned) with various attributes related to:
+The dataset uses the pre-processed DataFrame (df_cleaned) with various attributes related to:
 
 * Reviewer behavior (e.g., number of games owned, playtime stats)
 * Engagement metrics (e.g., votes, funny votes, comment count)
@@ -80,7 +70,7 @@ The dataset included a pre-processed DataFrame (df_cleaned) with various attribu
 
 For this initial model, we selected only numerical features to keep the pipeline simple and interpretable. The target variable weighted_vote_score was cast to a DoubleType and renamed as label for compatibility with Spark ML.
 
-The particular columns selected include:
+The particular columns selected include (Reference: [DATA_LABELS.md](/resources/DATA_LABELS.md)):
 * author_num_games_owned
 * author_num_reviews
 * author_playtime_forever
@@ -95,7 +85,7 @@ The particular columns selected include:
 * received_for_free
 * written_during_early_access
 
-Modeling Approach
+### Modeling Approach
 
 We used the Spark ML pipeline to streamline preprocessing and model training:
 * VectorAssembler: Combined all numeric features into a single vector.
@@ -106,33 +96,32 @@ In order to accurately assess model performance, we tested on various train/test
 
 Ground truth: weighted_vote_score
 
-##### Figure 1
-![Figure 1](/resources/screenshots/ground_truth.png)
+##### Figure 6
+![Figure 6](/resources/screenshots/ground_truth.png)
 The above figure depicts the first 100 values of the ground truth with its corresponding index. 
 
 ### Results 
 Train error Vs Test error across train/test splits:
 
-Training RMSE values: [0.06780513676116458, 0.06809054266893783, 0.06793147050810851, 0.06786924970348243, 0.06783383929472699]
+Training RMSE values: `[0.06780513676116458, 0.06809054266893783, 0.06793147050810851, 0.06786924970348243, 0.06783383929472699]`
 
-Testing RMSE values: [0.0677858225116503, 0.06795994752549109, 0.06785859680397434, 0.06774141874455455, 0.06766356133129071]
+Testing RMSE values: `[0.0677858225116503, 0.06795994752549109, 0.06785859680397434, 0.06774141874455455, 0.06766356133129071]`
 
-##### Figure 2
-![Figure 2](/resources/screenshots/train_vs_test_RMSE.png)
+##### Figure 7
+![Figure 7](/resources/screenshots/train_vs_test_RMSE.png)
 
 As can be seen by the graph above, train and test error are similar across all the train/test splits. This seems to indicate that the model is neither overfitting nor underfitting.
 
-##### Figure 3
-![Figure 3](/resources/screenshots/pred_overlay.png)
+##### Figure 8
+![Figure 8](/resources/screenshots/pred_overlay.png)
 
 However, the figure above, an overlay of the first 100 ground truths and the first 100 predictions of the 80/20 train-test split, shows that the model is actually underfitting and needs tuning in order to properly and accurately predict the weighted_vote_score.
 
-#### Model improvements
+### Model improvements and next models
 * Reducing regularization may assist in preserving the real signal in our chosen features to survive.
 * Incorporating additional features such as text-based sentiment analysis.
 * Utilizing cross-validation so the real signal in our chosen features survives.
 
-#### Next models 
 Currently, we are considering using Gradient Boosted Trees (GBTRegressor) and PCA with K-Means Clustering.
 
 Gradient Boosted Trees are well-suited for capturing complex, non-linear relationships in the data. They often outperform linear models in accuracy and provide feature importance scores, offering insight into which factors (like playtime or votes) most influence helpfulness.
@@ -141,8 +130,10 @@ PCA + K-Means is an unsupervised approach to uncover patterns in reviewer behavi
 
 Both models aid in our goal in this project of identifying potential contributions to algorithms that highlight relevant, personalized user recommendations or improve developer pricing.
 
-### Conclusion
+### Model 1 Conclusion
 The linear regression model achieved consistent performance across multiple runs, with training RMSE values averaging around 0.0679 and testing RMSE values averaging around 0.0678. This seemed to indicate that the model is not overfitting and generalizes well to unseen data within the current feature set. However, upon further analysis, it can be seen that the model is predicting extremely close to the average for every value and managed to achieve a low RMSE through underfitting. Although the model performed reasonably well, it is clear that the underfitting must be addressed in order to build an accurate and useful model that suits our purposes. Ways to improve its performance include incorporating additional features such as text-based sentiment analysis, tuning hyperparameters by exploring methods such as cross-validation, and applying target transformations such as log scale. 
+
+---
 
 ## Team Members
 * Danny Xia ([@dannyxia7](https://github.com/dannyxia7))
