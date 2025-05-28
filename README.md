@@ -21,6 +21,8 @@ With the prerequisite usage of SDSC Expanse the following were key parameters ou
 
 Provided in [232_subset.ipynb](232_subset.ipynb) is a cell in which `pip install -r requirements.txt` can be performed to install necessary packages. Additionally, due to favorable runtimes in the pre-processing, slurm scheduling was not needed. 
 
+Spark Driver and Executor allocations are seen with early cells of [232_subset.ipynb](232_subset.ipynb) and preserved throughout. 
+
 > Source of the data is located here: [100 Million+ Steam Reviews | Kaggle](https://www.kaggle.com/datasets/kieranpoc/steam-reviews/data)
 
 ## Preprocessing (Milestone 2) 
