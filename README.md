@@ -19,12 +19,21 @@ With the prerequisite usage of SDSC Expanse the following were key parameters ou
 * Working directory: home
 * Type: JupyterLab
 
-Provided in [232_subset.ipynb](232_subset.ipynb) is a cell in which `pip install -r requirements.txt` can be performed to install necessary packages. Additionally, due to favorable runtimes in the pre-processing, slurm scheduling was not needed. 
+Provided in [NB0_Original_Sampled_Data.ipynb](/notebooks/NB0_Original_Sampled_Data.ipynb) is a cell in which `pip install -r ../requirements.txt` can be performed to install necessary packages. Additionally, due to favorable runtimes in the pre-processing, slurm scheduling was not needed. 
 
 > Source of the data is located here: [100 Million+ Steam Reviews | Kaggle](https://www.kaggle.com/datasets/kieranpoc/steam-reviews/data)
 
+## [Notebook](/notebooks/) Index 
+
+* [NB0_Original_Sampled_Data.ipynb](/notebooks/NB0_Original_Sampled_Data.ipynb) -  Used to create n samples of overall data 
+* [NB1_Sampled_EDA.ipynb](/notebooks/NB1_Sampled_EDA.ipynb.ipynb) - Exploratory visualizations on the sampled data
+* [NB2_Data_Cleaning.ipynb](/notebooks/NB0_Original_Sampled_Data.ipynb) - Processing of total dataset, creation of cleaned file
+* [NB3_Additional_Visualizations.ipynb](/notebooks/NB3_Additional_Visualizations.ipynb.ipynb) - Visualizations on cleaned data
+* [NB4_Model_1.ipynb](/notebooks/NB4_Model_1.ipynb) - Initial machine learning model on processed data
+
 ## Preprocessing (Milestone 2) 
-> Key Files: [232_subset.ipynb](232_subset.ipynb) was used to process initial data
+> Key Files: [NB0_Original_Sampled_Data.ipynb](/notebooks/NB0_Original_Sampled_Data.ipynb) in creation of sampled datasets, [NB2_Data_Cleaning.ipynb](/notebooks/NB0_Original_Sampled_Data.ipynb) was used to process initial data
+* Created sample set of data using NB0 for initial brainstorming and visualization. 
 * Performed initial cleanup by filtering out weighted vote scores of 0 to capture removal of reviews that are not useful, are from bots, or are potentially spam. Parameter can be filtered further as needed for machine learning methods
 * Re-established dataframe schema and dropped null values for corrupted rows (comma handling errors)
 * Filtered by weighted vote score between 0-1 as additional means of removing errant data
@@ -33,7 +42,7 @@ Provided in [232_subset.ipynb](232_subset.ipynb) is a cell in which `pip install
 * Dropped any potential duplicates in the sampling of the data
 
 ## Initial Visualizations
->Key Files: [DSC232R_group_proj_vis.ipynb](DSC232R_group_proj_vis.ipynb) and [playtime_visualizations.ipynb](playtime_visualizations.ipynb) used to generate visualizations, with the former used on a sample of the data
+>Key Files: [NB1_Sampled_EDA.ipynb](/notebooks/NB1_Sampled_EDA.ipynb.ipynb) and [NB3_Additional_Visualizations.ipynb](/notebooks/NB3_Additional_Visualizations.ipynb.ipynb) used to generate visualizations, with the former used on a sample of the data
 
 General statistics and visualizations shown from clean data, used to brainstorm future ML models and processing
 
@@ -56,7 +65,7 @@ General statistics and visualizations shown from clean data, used to brainstorm 
 
 ## Model 1 Overview: Helpfulness Score Regression (Milestone 3)
 
-> Key Files: [Model 1 Notebook](MS3_Model_1.ipynb), used in conjunction with the [cleaned data set](https://drive.google.com/file/d/12S7orw3WFnilznJpWCwaLdhBPNwHmMcu/view?usp=sharing) (obtained following initial [cleanup](232_subset.ipynb))
+> Key Files: [Model 1 Notebook](/notebooks/NB4_Model_1.ipynb), used in conjunction with the [cleaned data set](https://drive.google.com/file/d/12S7orw3WFnilznJpWCwaLdhBPNwHmMcu/view?usp=sharing) (obtained following initial [cleanup](/notebooks/NB0_Original_Sampled_Data.ipynb))
 
 ### Objective: 
 The goal of this model is to build a regression model to predict the helpfulness score (represented by the weighted_vote_score) of Steam reviews using various numeric features derived from the review metadata and the reviewer’s profile.
@@ -87,7 +96,7 @@ The particular columns selected include (Reference: [DATA_LABELS.md](/resources/
 
 ### Modeling Approach
 
-We used the Spark ML pipeline to streamline preprocessing and model training:
+We used the Spark ML pipeline to streamline preprocessing and model training:   
 * VectorAssembler: Combined all numeric features into a single vector.
 * StandardScaler: Standardized features to zero mean and unit variance to improve gradient descent convergence.
 * LinearRegression: Used as an interpretable baseline model.
