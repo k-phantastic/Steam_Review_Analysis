@@ -146,7 +146,7 @@ The linear regression model achieved consistent performance across multiple runs
 
 ## Team Members
 * Danny Xia ([@dannyxia7](https://github.com/dannyxia7))
-* Khanh Phan ([@khp023](https://github.com/khp023))
+* Khanh Phan ([@khp023](https://github.com/k-phantastic))
 * Layth Marabeh ([@lmarabeh](https://github.com/lmarabeh))
 
 ## Sources
