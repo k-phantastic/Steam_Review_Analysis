@@ -28,7 +28,7 @@ Provided in [NB0_Original_Sampled_Data.ipynb](/notebooks/NB0_Original_Sampled_Da
 * [NB0_Original_Sampled_Data.ipynb](/notebooks/NB0_Original_Sampled_Data.ipynb) -  Used to create n samples of overall data 
 * [NB1_Sampled_EDA.ipynb](/notebooks/NB1_Sampled_EDA.ipynb.ipynb) - Exploratory visualizations on the sampled data
 * [NB2_Data_Cleaning.ipynb](/notebooks/NB0_Original_Sampled_Data.ipynb) - Processing of total dataset, creation of cleaned file
-* [NB3_Additional_Visualizations.ipynb](/notebooks/NB3_Additional_Visualizations.ipynb.ipynb) - Visualizations on cleaned data
+* [NB3_Additional_Visualizations.ipynb](/notebooks/NB3_Additional_Visualizations.ipynb) - Visualizations on cleaned data
 * [NB4_Model_1.ipynb](/notebooks/NB4_Model_1.ipynb) - Initial machine learning model on processed data
 
 ## Preprocessing (Milestone 2) 
