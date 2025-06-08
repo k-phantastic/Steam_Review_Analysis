@@ -117,7 +117,7 @@ Training RMSE values: `[0.06780513676116458, 0.06809054266893783, 0.067931470508
 Testing RMSE values: `[0.0677858225116503, 0.06795994752549109, 0.06785859680397434, 0.06774141874455455, 0.06766356133129071]`
 
 ##### Figure 7
-![Figure 7](/resources/screenshots/train_vs_test_RMSE.png)
+![Figure 7](/resources/screenshots/rmse_features.png)
 
 As can be seen by the graph above, train and test error are similar across all the train/test splits. This seems to indicate that the model is neither overfitting nor underfitting.
 
