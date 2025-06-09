@@ -44,19 +44,19 @@ The dataset uses the pre-processed DataFrame (df_cleaned) with various attribute
 For this initial model, we selected only numerical features to keep the pipeline simple and interpretable. The target variable weighted_vote_score was cast to a DoubleType and renamed as label for compatibility with Spark ML.
 
 The particular columns selected include (Reference: [DATA_LABELS.md](/resources/DATA_LABELS.md)):
-* author_num_games_owned
-* author_num_reviews
-* author_playtime_forever
-* author_playtime_last_two_weeks
-* author_playtime_at_review
-* author_last_played
-* voted_up
-* votes_up
-* votes_funny
-* comment_count
-* steam_purchase
-* received_for_free
-* written_during_early_access
+* `author_num_games_owned`
+* `author_num_reviews`
+* `author_playtime_forever`
+* `author_playtime_last_two_weeks`
+* `author_playtime_at_review`
+*  `author_last_played`
+* `voted_up`
+* `votes_up`
+* `votes_funny`
+* `comment_count`
+* `steam_purchase`
+* `received_for_free`
+* `written_during_early_access`
 
 ### Initial Visualizations
 >Key Files: [NB1_Sampled_EDA.ipynb](/notebooks/NB1_Sampled_EDA.ipynb.ipynb) and [NB3_Additional_Visualizations.ipynb](/notebooks/NB3_Additional_Visualizations.ipynb) used to generate visualizations, with the former used on a sample of the data
@@ -100,13 +100,13 @@ The goal of this model is to build a regression model to predict the helpfulness
 ### Modeling Approach
 
 We used the Spark ML pipeline to streamline preprocessing and model training:   
-* VectorAssembler: Combined all numeric features into a single vector.
-* StandardScaler: Standardized features to zero mean and unit variance to improve gradient descent convergence.
-* LinearRegression: Used as an interpretable baseline model.
+* `VectorAssembler`: Combined all numeric features into a single vector.
+* `StandardScaler`: Standardized features to zero mean and unit variance to improve gradient descent convergence.
+* `LinearRegression`: Used as an interpretable baseline model.
 
 In order to accurately assess model performance, we tested on various train/test splits with the train values set to: [0.1, 0.2, 0.5, 0.8, 0.9]. The model was evaluated using Root Mean Squared Error (RMSE).
 
-Ground truth: weighted_vote_score
+Ground truth: `weighted_vote_score`
 
 ##### Figure 6
 ![Figure 6](/resources/screenshots/ground_truth.png)
