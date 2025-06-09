@@ -64,19 +64,19 @@ The particular columns selected include (Reference: [DATA_LABELS.md](/resources/
 General statistics and visualizations shown from clean data, used to brainstorm future ML models and processing
 
 ##### Figure 1: Which games have the most reviews or most passionate reviewers (as seen in total hours)
-<img src="/resources/screenshots/top10gamesReviewStatistics_ALLDATA.png" alt="Figure 1" width="500">
+<img src="/resources/screenshots/steam_theme/top10gamesReviewStatistics_ALLDATA.png" alt="Figure 1" width="500">
 
 ##### Figure 2 (sampled data): Weighted Vote Score vs Review Vote (1 being upvote) 
-<img src="/resources/screenshots/boxplot.png" alt="Figure 2" width="500">
+<img src="/resources/screenshots/steam_theme/boxplot.png" alt="Figure 2" width="500">
 
 ##### Figure 3 (sampled data): Heatmap of a features hypothesized to be useful for ML
-<img src="/resources/screenshots/heatmap.png" alt="Figure 3" width="500">
+<img src="/resources/screenshots/steam_theme/heatmap.png" alt="Figure 3" width="500">
 
 ##### Figure 4 (sampled data): Histogram of Weighted Vote Score (pre-filtered score of >0.8)
-<img src="/resources/screenshots/histogram.png" alt="Figure 4" width="500">
+<img src="/resources/screenshots/steam_theme/histogram.png" alt="Figure 4" width="500">
 
 ##### Figure 5 (sampled data): Scatterplot of Author Playtime (at time of review) vs Weighted Vote Score, with weak correlation 
-<img src="/resources/screenshots/scatter.png" alt="Figure 5" width="500">
+<img src="/resources/screenshots/steam_theme/scatter.png" alt="Figure 5" width="500">
 
 ### Preprocessing (Milestone 2) 
 > Key Files: [NB0_Original_Sampled_Data.ipynb](/notebooks/NB0_Original_Sampled_Data.ipynb) in creation of sampled datasets, [NB2_Data_Cleaning.ipynb](/notebooks/NB0_Original_Sampled_Data.ipynb) was used to process initial data
@@ -108,7 +108,7 @@ In order to accurately assess model performance, we tested on various train/test
 Ground truth: `weighted_vote_score`
 
 ##### Figure 6
-![Figure 6](/resources/screenshots/ground_truth.png)
+![Figure 6](/resources/screenshots/steam_theme/ground_truth.png)
 
 The above figure depicts the first 100 values of the ground truth with its corresponding index. 
 
@@ -155,7 +155,7 @@ The above figure depicts the first 100 values of the ground truth with its corre
 | 13            | 0.0677    | 0.0015      |
 
 ##### Figure 7
-![Figure 7](/resources/screenshots/rmse_features.png)
+![Figure 7](/resources/screenshots/steam_theme/rmse_features.png)
 
 The linear regression model achieved consistent performance across multiple runs, with training RMSE values converging to around 0.0679 and test RMSE values converging to around 0.0677. We can see that the improvement in the RMSEs seems to drop off around 4 or 5 features, and this finding is in line with the rank and RMSE reduction of each feature. So for our model selection, to avoid overfitting, we should choose a model using the top 4 or 5 features for the best performance.
 
@@ -163,7 +163,7 @@ The linear regression model achieved consistent performance across multiple runs
 The goal in using a Linear Regression model was to leverage the number of numeric columns in the data set and make good use of what was already provided. The initial assumption was that the numerical features included in the data set held more weight in deciding the weighted vote score than any of the text columns, resulting in training the model on these features alone. Evaluating the model on 5 different train-test splits was a design that was intended to test for overfitting and at what point it occurred. The RMSE for all of the train-test splits being almost the same was promising at first; however, it was clear that the issue wasn't overfitting but rather underfitting. This was made clear by the figure below. As mentioned in a previous submission, the next step was to utilize the text features and possibly use a log scale for the numeric features used in an attempt to have the model accurately predict the weighted vote score rather than predicting the average and achieving a low RMSE through underfitting. 
 
 ##### Figure 8
-![Figure 8](/resources/screenshots/pred_overlay.png)
+![Figure 8](/resources/screenshots/steam_theme/pred_overlay.png)
 
 In the figure above, an overlay of the first 100 ground truths and the first 100 predictions of the 80/20 train-test split, suggests that the model may actually be underfitting and may need tuning in order to properly and accurately predict the weighted_vote_score.
 
@@ -193,7 +193,7 @@ Danny Xia: Coder/Writer
 * He wrote or edited many of the written documents, including the abstract from Milestone 2 and the final written report/README.md. He also created data visualizations as part of the data exploration milestone and conceptualized the idea for the models. Finally, he wrote and edited the code for finding the best features and models for the linear regression model and creating the plots that compared the train RMSE and test RMSE in relation to the number of features. He collaborated with group members in meetings to discuss progress updates and provide suggestions on the best approaches to solving the objectives from the milestones.
 
 Khanh Phan: Coder/Writer
-* He wrote the initial README format and the code for the initial sampling of the dataset used for local processing and exploratory data analysis. He identified key issues in the raw data affecting initial analysis and processing. Upon establishing up the appropriate setup for runtimes, he was able to help process and clean-up the raw data for use in downstream tasks. He assisted in generating visualizations with the cleaned data. He was a key contributor in maintaining repository and project flow, including the publishing of the data labels and the setup requirements. 
+* He wrote the initial README format and the code for the initial sampling of the dataset used for local processing and exploratory data analysis. He identified key issues in the raw data affecting initial analysis and processing. Upon establishing up the appropriate setup for runtimes, he was able to help process and clean-up the raw data for use in downstream tasks. He assisted in generating visualizations with the cleaned data. He was a key contributor in maintaining repository and project flow, including the publishing of the data labels, redesign of plots to match Steam's color palette, and the setup requirements. 
 
 
 ## Team Members
