@@ -31,46 +31,7 @@ Provided in [NB0_Original_Sampled_Data.ipynb](/notebooks/NB0_Original_Sampled_Da
 * [NB3_Additional_Visualizations.ipynb](/notebooks/NB3_Additional_Visualizations.ipynb) - Visualizations on cleaned data
 * [NB4_Model_1.ipynb](/notebooks/NB4_Model_1.ipynb) - Initial machine learning model on processed data
 
-## Preprocessing (Milestone 2) 
-> Key Files: [NB0_Original_Sampled_Data.ipynb](/notebooks/NB0_Original_Sampled_Data.ipynb) in creation of sampled datasets, [NB2_Data_Cleaning.ipynb](/notebooks/NB0_Original_Sampled_Data.ipynb) was used to process initial data
-* Created sample set of data using NB0 for initial brainstorming and visualization. 
-* Performed initial cleanup by filtering out weighted vote scores of 0 to capture removal of reviews that are not useful, are from bots, or are potentially spam. Parameter can be filtered further as needed for machine learning methods
-* Re-established dataframe schema and dropped null values for corrupted rows (comma handling errors)
-* Filtered by weighted vote score between 0-1 as additional means of removing errant data
-* Dropped columns that are for sure not to be used: hidden_in_steam_china, steam_china_location, review
-* Converted playtime statistics to floats and converted from minutes played to hours played (to align with Steam current interface)
-* Dropped any potential duplicates in the sampling of the data
-
-## Initial Visualizations
->Key Files: [NB1_Sampled_EDA.ipynb](/notebooks/NB1_Sampled_EDA.ipynb.ipynb) and [NB3_Additional_Visualizations.ipynb](/notebooks/NB3_Additional_Visualizations.ipynb.ipynb) used to generate visualizations, with the former used on a sample of the data
-
-General statistics and visualizations shown from clean data, used to brainstorm future ML models and processing
-
-##### Figure 1: Which games have the most reviews or most passionate reviewers (as seen in total hours)
-![Figure 1](/resources/screenshots/top10gamesReviewStatistics_ALLDATA.png)
-
-##### Figure 2 (sampled data): Weighted Vote Score vs Review Vote (1 being upvote) 
-![Figure 2](/resources/screenshots/boxplot.png)
-
-##### Figure 3 (sampled data): Heatmap of a features hypothesized to be useful for ML
-![Figure 3](/resources/screenshots/heatmap.png)
-
-##### Figure 4 (sampled data): Histogram of Weighted Vote Score (pre-filtered score of >0.8)
-![Figure 4](/resources/screenshots/histogram.png)
-
-##### Figure 5 (sampled data): Scatterplot of Author Playtime (at time of review) vs Weighted Vote Score, with weak correlation 
-![Figure 5](/resources/screenshots/scatter.png)
-
----
-
-## Model 1 Overview: Helpfulness Score Regression (Milestone 3)
-
-> Key Files: [Model 1 Notebook](/notebooks/NB4_Model_1.ipynb), used in conjunction with the [cleaned data set](https://drive.google.com/file/d/12S7orw3WFnilznJpWCwaLdhBPNwHmMcu/view?usp=sharing) (obtained following initial [cleanup](/notebooks/NB0_Original_Sampled_Data.ipynb))
-
-### Objective: 
-The goal of this model is to build a regression model to predict the helpfulness score (represented by the weighted_vote_score) of Steam reviews using various numeric features derived from the review metadata and the reviewer’s profile.
-
-### Methods
+## Methods
 The dataset uses the pre-processed DataFrame (df_cleaned) with various attributes related to:
 
 * Reviewer behavior (e.g., number of games owned, playtime stats)
@@ -94,6 +55,45 @@ The particular columns selected include (Reference: [DATA_LABELS.md](/resources/
 * received_for_free
 * written_during_early_access
 
+### Initial Visualizations
+>Key Files: [NB1_Sampled_EDA.ipynb](/notebooks/NB1_Sampled_EDA.ipynb.ipynb) and [NB3_Additional_Visualizations.ipynb](/notebooks/NB3_Additional_Visualizations.ipynb) used to generate visualizations, with the former used on a sample of the data
+
+General statistics and visualizations shown from clean data, used to brainstorm future ML models and processing
+
+##### Figure 1: Which games have the most reviews or most passionate reviewers (as seen in total hours)
+![Figure 1](/resources/screenshots/top10gamesReviewStatistics_ALLDATA.png)
+
+##### Figure 2 (sampled data): Weighted Vote Score vs Review Vote (1 being upvote) 
+![Figure 2](/resources/screenshots/boxplot.png)
+
+##### Figure 3 (sampled data): Heatmap of a features hypothesized to be useful for ML
+![Figure 3](/resources/screenshots/heatmap.png)
+
+##### Figure 4 (sampled data): Histogram of Weighted Vote Score (pre-filtered score of >0.8)
+![Figure 4](/resources/screenshots/histogram.png)
+
+##### Figure 5 (sampled data): Scatterplot of Author Playtime (at time of review) vs Weighted Vote Score, with weak correlation 
+![Figure 5](/resources/screenshots/scatter.png)
+
+### Preprocessing (Milestone 2) 
+> Key Files: [NB0_Original_Sampled_Data.ipynb](/notebooks/NB0_Original_Sampled_Data.ipynb) in creation of sampled datasets, [NB2_Data_Cleaning.ipynb](/notebooks/NB0_Original_Sampled_Data.ipynb) was used to process initial data
+* Created sample set of data using NB0 for initial brainstorming and visualization. 
+* Performed initial cleanup by filtering out weighted vote scores of 0 to capture removal of reviews that are not useful, are from bots, or are potentially spam. Parameter can be filtered further as needed for machine learning methods
+* Re-established dataframe schema and dropped null values for corrupted rows (comma handling errors)
+* Filtered by weighted vote score between 0-1 as additional means of removing errant data
+* Dropped columns that are for sure not to be used: hidden_in_steam_china, steam_china_location, review
+* Converted playtime statistics to floats and converted from minutes played to hours played (to align with Steam current interface)
+* Dropped any potential duplicates in the sampling of the data
+
+---
+
+## Model 1 Overview: Helpfulness Score Regression (Milestone 3)
+
+> Key Files: [Model 1 Notebook](/notebooks/NB4_Model_1.ipynb), used in conjunction with the [cleaned data set](https://drive.google.com/file/d/12S7orw3WFnilznJpWCwaLdhBPNwHmMcu/view?usp=sharing) (obtained following initial [cleanup](/notebooks/NB0_Original_Sampled_Data.ipynb))
+
+### Objective: 
+The goal of this model is to build a regression model to predict the helpfulness score (represented by the weighted_vote_score) of Steam reviews using various numeric features derived from the review metadata and the reviewer’s profile.
+
 ### Modeling Approach
 
 We used the Spark ML pipeline to streamline preprocessing and model training:   
@@ -109,7 +109,7 @@ Ground truth: weighted_vote_score
 ![Figure 6](/resources/screenshots/ground_truth.png)
 The above figure depicts the first 100 values of the ground truth with its corresponding index. 
 
-### Results 
+## Results 
 Train error Vs Test error across train/test splits:
 
 Training RMSE values: `[0.06780513676116458, 0.06809054266893783, 0.06793147050810851, 0.06786924970348243, 0.06783383929472699]`
@@ -121,12 +121,18 @@ Testing RMSE values: `[0.0677858225116503, 0.06795994752549109, 0.06785859680397
 
 As can be seen by the graph above, train and test error are similar across all the train/test splits. This seems to indicate that the model is neither overfitting nor underfitting.
 
+## Model 1 Discussion: Improvements and Next Models
+
 ##### Figure 8
 ![Figure 8](/resources/screenshots/pred_overlay.png)
 
 However, the figure above, an overlay of the first 100 ground truths and the first 100 predictions of the 80/20 train-test split, shows that the model is actually underfitting and needs tuning in order to properly and accurately predict the weighted_vote_score.
 
-### Model improvements and next models
+The linear regression model achieved consistent performance across multiple runs, with training RMSE values averaging around 0.0679 and testing RMSE values averaging around 0.0678. This seemed to indicate that the model is not overfitting and generalizes well to unseen data within the current feature set. However, upon further analysis, it can be seen that the model is predicting extremely close to the average for every value and managed to achieve a low RMSE through underfitting. Although the model performed reasonably well, it is clear that the underfitting must be addressed in order to build an accurate and useful model that suits our purposes.
+
+### Model 1 Conclusion
+Ways to improve its performance include incorporating additional features such as text-based sentiment analysis, tuning hyperparameters by exploring methods such as cross-validation, and applying target transformations such as log scale. 
+
 * Reducing regularization may assist in preserving the real signal in our chosen features to survive.
 * Incorporating additional features such as text-based sentiment analysis.
 * Utilizing cross-validation so the real signal in our chosen features survives.
@@ -138,9 +144,6 @@ Gradient Boosted Trees are well-suited for capturing complex, non-linear relatio
 PCA + K-Means is an unsupervised approach to uncover patterns in reviewer behavior. PCA reduces noise and highlights key feature combinations, while K-Means can group similar reviewers. This can reveal distinct user types (e.g., casual vs. dedicated reviewers) and generate new features to improve predictive models.
 
 Both models aid in our goal in this project of identifying potential contributions to algorithms that highlight relevant, personalized user recommendations or improve developer pricing.
-
-### Model 1 Conclusion
-The linear regression model achieved consistent performance across multiple runs, with training RMSE values averaging around 0.0679 and testing RMSE values averaging around 0.0678. This seemed to indicate that the model is not overfitting and generalizes well to unseen data within the current feature set. However, upon further analysis, it can be seen that the model is predicting extremely close to the average for every value and managed to achieve a low RMSE through underfitting. Although the model performed reasonably well, it is clear that the underfitting must be addressed in order to build an accurate and useful model that suits our purposes. Ways to improve its performance include incorporating additional features such as text-based sentiment analysis, tuning hyperparameters by exploring methods such as cross-validation, and applying target transformations such as log scale. 
 
 ---
 ## Statement of Collaboration
