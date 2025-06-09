@@ -1,4 +1,4 @@
-# Steam Review Analysis
+# <img src="/resources/screenshots/steam-logo-transparent.png" width="32"> Steam Review Analysis
 
 ## Introduction
 We chose this dataset because all of us happened to be avid gamers, so we naturally had an interest in the topic. For the dataset itself, there was a sufficient amount of data with more than enough attributes to have a lot of options for creating models. This includes how we would pre-process the data, which attributes to use, the purpose of our model, and the actual type of model itself. In terms of having a good predictive mode, our model predicting the helpfulness of user reviews can be helpful for highlighting the most relevant reviews when users are thinking about buying a game, thus boosting sales, or it could give insight into the most common sentiments on the pros and cons of the game, thus allowing developers to target aspects of their game that they can improve.  
@@ -64,29 +64,28 @@ The particular columns selected include (Reference: [DATA_LABELS.md](/resources/
 General statistics and visualizations shown from clean data, used to brainstorm future ML models and processing
 
 ##### Figure 1: Which games have the most reviews or most passionate reviewers (as seen in total hours)
-![Figure 1](/resources/screenshots/top10gamesReviewStatistics_ALLDATA.png)
+<img src="/resources/screenshots/top10gamesReviewStatistics_ALLDATA.png" alt="Figure 1" width="500">
 
 ##### Figure 2 (sampled data): Weighted Vote Score vs Review Vote (1 being upvote) 
-![Figure 2](/resources/screenshots/boxplot.png)
+<img src="/resources/screenshots/boxplot.png" alt="Figure 2" width="500">
 
 ##### Figure 3 (sampled data): Heatmap of a features hypothesized to be useful for ML
-![Figure 3](/resources/screenshots/heatmap.png)
+<img src="/resources/screenshots/heatmap.png" alt="Figure 3" width="500">
 
 ##### Figure 4 (sampled data): Histogram of Weighted Vote Score (pre-filtered score of >0.8)
-![Figure 4](/resources/screenshots/histogram.png)
+<img src="/resources/screenshots/histogram.png" alt="Figure 4" width="500">
 
 ##### Figure 5 (sampled data): Scatterplot of Author Playtime (at time of review) vs Weighted Vote Score, with weak correlation 
-![Figure 5](/resources/screenshots/scatter.png)
+<img src="/resources/screenshots/scatter.png" alt="Figure 5" width="500">
 
 ### Preprocessing (Milestone 2) 
 > Key Files: [NB0_Original_Sampled_Data.ipynb](/notebooks/NB0_Original_Sampled_Data.ipynb) in creation of sampled datasets, [NB2_Data_Cleaning.ipynb](/notebooks/NB0_Original_Sampled_Data.ipynb) was used to process initial data
-* Created sample set of data using NB0 for initial brainstorming and visualization. 
-* Performed initial cleanup by filtering out weighted vote scores of 0 to capture removal of reviews that are not useful, are from bots, or are potentially spam. Parameter can be filtered further as needed for machine learning methods
-* Re-established dataframe schema and dropped null values for corrupted rows (comma handling errors)
-* Filtered by weighted vote score between 0-1 as additional means of removing errant data
-* Dropped columns that are for sure not to be used: hidden_in_steam_china, steam_china_location, review
-* Converted playtime statistics to floats and converted from minutes played to hours played (to align with Steam current interface)
-* Dropped any potential duplicates in the sampling of the data
+
+The initial dataset was provided as a CSV file with 113,885,601 rows of review data. To expedite initial brainstorming and exploratory data analysis, a random sample of 100,000 rows was created from the raw data for use in visualizations. 
+
+The raw data was initially filtered by excluding weighted vote scores to capture removal of reviews that are not useful, are from bots, or are potentially just spam. Upon initial statistical overview, we found erroneous data in some of the columns. An example, as shown through NB2, was row #144385593, where `author_steamid = "" RIGHT? SO HERE...` (an integer key is expected). The raw csv file had corrupted rows in columns where the game titles were both too long and had excess commas. The inferred schema was then corrected such that string values in the incorrect columns became null. Following an aggressive null drop, the data set was filtered once more by the weighted vote score to remove values outside the scale. To reduce memory load and for the purposes of the study, we removed the following columns as they were not to be used in our subsequent models: `hidden_in_steam_china`, `steam_china_location`, `review`. Date and time columns were converted appropriately, with playtime statistics converted from minutes played to hours played to align with Steam current interface.
+
+Following final confirmation of no duplicates in the data, the now cleaned 37,708,777 rows of relevant data was written to disk for use in subsequent notebooks.  
 
 ---
 
@@ -109,7 +108,8 @@ In order to accurately assess model performance, we tested on various train/test
 Ground truth: `weighted_vote_score`
 
 ##### Figure 6
-![Figure 6](/resources/screenshots/ground_truth.png)
+<img src="/resources/screenshots/ground_truth.png" alt="Figure 6" width="500">
+
 The above figure depicts the first 100 values of the ground truth with its corresponding index. 
 
 ## Results 
@@ -155,7 +155,7 @@ The above figure depicts the first 100 values of the ground truth with its corre
 | 13            | 0.0677    | 0.0015      |
 
 ##### Figure 7
-![Figure 7](/resources/screenshots/rmse_features.png)
+<img src="/resources/screenshots/rmse_features.png" alt="Figure 7" width="500">
 
 The linear regression model achieved consistent performance across multiple runs, with training RMSE values converging to around 0.0679 and test RMSE values converging to around 0.0677. We can see that the improvement in the RMSEs seems to drop off around 4 or 5 features, and this finding is in line with the rank and RMSE reduction of each feature. So for our model selection, to avoid overfitting, we should choose a model using the top 4 or 5 features for the best performance.
 
@@ -163,7 +163,7 @@ The linear regression model achieved consistent performance across multiple runs
 The goal in using a Linear Regression model was to leverage the number of numeric columns in the data set and make good use of what was already provided. The initial assumption was that the numerical features included in the data set held more weight in deciding the weighted vote score than any of the text columns, resulting in training the model on these features alone. Evaluating the model on 5 different train-test splits was a design that was intended to test for overfitting and at what point it occurred. The RMSE for all of the train-test splits being almost the same was promising at first; however, it was clear that the issue wasn't overfitting but rather underfitting. This was made clear by the figure below. As mentioned in a previous submission, the next step was to utilize the text features and possibly use a log scale for the numeric features used in an attempt to have the model accurately predict the weighted vote score rather than predicting the average and achieving a low RMSE through underfitting.
 
 ##### Figure 8
-![Figure 8](/resources/screenshots/pred_overlay.png)
+<img src="/resources/screenshots/pred_overlay.png" alt="Figure 8" width="500">
 
 In the figure above, an overlay of the first 100 ground truths and the first 100 predictions of the 80/20 train-test split, suggests that the model may actually be underfitting and may need tuning in order to properly and accurately predict the weighted_vote_score.
 
@@ -187,12 +187,17 @@ Both models aid in our goal in this project of identifying potential contributio
 Layth Marabeh: Coder/Writer
 * He participated in group meetings once/twice per week to discuss progress updates, solve bugs, suggest additions to be made in the code and README. He wrote most of the code for Milestone 3 data pre-processing, such as scaling the data, imputing the data, encoding the data, feature expansion, filtering by weighted vote score, and dropping unnecessary columns. He is also responsible for the coding of model 1 along with all the figures that coincide and writing the majority of the Milestone 3 README.
 
-Danny Xia
+Danny Xia: Coder/Writer
 * He wrote or edited many of the written documents, including the abstract from Milestone 2 and the final written report/README.md. He also created data visualizations as part of the data exploration milestone and conceptualized the idea for the models. Finally, he wrote and edited the code for finding the best features and models for the linear regression model and creating the plots that compared the train RMSE and test RMSE in relation to the number of features. He collaborated with group members in meetings to discuss progress updates and provide suggestions on the best approaches to solving the objectives from the milestones.
+
+Khanh Phan: Coder/Writer
+* He wrote the initial README format and the code for the initial sampling of the dataset used for local processing and exploratory data analysis. He identified key issues in the raw data affecting initial analysis and processing. Upon establishing up the appropriate setup for runtimes, he was able to help process and clean-up the raw data for use in downstream tasks. He assisted in generating visualizations with the cleaned data. He was a key contributor in maintaining repository and project flow, including the publishing of the data labels and the setup requirements. 
+
+
 ## Team Members
-* Danny Xia ([@dannyxia7](https://github.com/dannyxia7))
-* Khanh Phan ([@khp023](https://github.com/k-phantastic))
 * Layth Marabeh ([@lmarabeh](https://github.com/lmarabeh))
+* Danny Xia ([@dannyxia7](https://github.com/dannyxia7))
+* Khanh Phan ([@k-phantastic](https://github.com/k-phantastic))
 
 ## Sources
 * [100 Million+ Steam Reviews | Kaggle](https://www.kaggle.com/datasets/kieranpoc/steam-reviews/data)
