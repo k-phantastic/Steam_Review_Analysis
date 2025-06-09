@@ -108,7 +108,7 @@ In order to accurately assess model performance, we tested on various train/test
 Ground truth: `weighted_vote_score`
 
 ##### Figure 6
-![Figure 6](/resources/screenshots/screenshots/ground_truth.png)
+![Figure 6](/resources/screenshots/ground_truth.png)
 
 The above figure depicts the first 100 values of the ground truth with its corresponding index. 
 
@@ -155,7 +155,7 @@ The above figure depicts the first 100 values of the ground truth with its corre
 | 13            | 0.0677    | 0.0015      |
 
 ##### Figure 7
-![Figure 7](/resources/screenshots/screenshots/rmse_features.png)
+![Figure 7](/resources/screenshots/rmse_features.png)
 
 
 The linear regression model achieved consistent performance across multiple runs, with training RMSE values converging to around 0.0679 and test RMSE values converging to around 0.0677. We can see that the improvement in the RMSEs seems to drop off around 4 or 5 features, and this finding is in line with the rank and RMSE reduction of each feature. So for our model selection, to avoid overfitting, we should choose a model using the top 4 or 5 features for the best performance.
@@ -164,7 +164,7 @@ The linear regression model achieved consistent performance across multiple runs
 The goal in using a Linear Regression model was to leverage the number of numeric columns in the data set and make good use of what was already provided. The initial assumption was that the numerical features included in the data set held more weight in deciding the weighted vote score than any of the text columns, resulting in training the model on these features alone. Evaluating the model on 5 different train-test splits was a design that was intended to test for overfitting and at what point it occurred. The RMSE for all of the train-test splits being almost the same was promising at first; however, it was clear that the issue wasn't overfitting but rather underfitting. This was made clear by the figure below. As mentioned in a previous submission, the next step was to utilize the text features and possibly use a log scale for the numeric features used in an attempt to have the model accurately predict the weighted vote score rather than predicting the average and achieving a low RMSE through underfitting.
 
 ##### Figure 8
-![Figure 8](/resources/screenshots/screenshots/pred_overlay.png)
+![Figure 8](/resources/screenshots/pred_overlay.png)
 
 In the figure above, an overlay of the first 100 ground truths and the first 100 predictions of the 80/20 train-test split, suggests that the model may actually be underfitting and may need tuning in order to properly and accurately predict the weighted_vote_score.
 
