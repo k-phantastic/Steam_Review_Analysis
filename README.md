@@ -132,7 +132,7 @@ The above figure depicts the first 100 values of the ground truth with its corre
 | 13   | `author_last_played`             | 0.0025           |
 
 **Recommended number of features (elbow point):** 4 or 5  
-**Selected features:** `votes_up`, `voted_up`, `votes_funny`, `comment_count`, 'author_num_reviews'
+**Selected features:** `votes_up`, `voted_up`, `votes_funny`, `comment_count`, `author_num_reviews`
 
 ---
 
