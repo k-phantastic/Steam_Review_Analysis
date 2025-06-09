@@ -149,6 +149,9 @@ Both models aid in our goal in this project of identifying potential contributio
 ## Statement of Collaboration
 Layth Marabeh: Coder/Writer
 * Met in group meetings once/twice per week to discuss progress updates, solve bugs, suggest additions to be made in the code and README. Helped in coding a few of the preprocessing steps such as filtering by weighted vote score and dropping unnecessary columns. Is responsible for the coding of model 1 and writing the majority of the Milestone 3 README.
+
+Danny Xia
+* He wrote or edited many of the written documents, including the abstract from milestone 2 and the final written report/README.md. He also created data visualizations as part of the data exploration milestone and conceptualized the idea for the models. Finally, he wrote and edited the code for finding the best features and models for the linear regression model and creating the plots that compared the train RMSE and test RMSE in relation to the number of features. He collaborated with group members in meetings to discuss progress updates and provide suggestions on best approach to solving objectives from the milestones.
 ## Team Members
 * Danny Xia ([@dannyxia7](https://github.com/dannyxia7))
 * Khanh Phan ([@khp023](https://github.com/k-phantastic))
