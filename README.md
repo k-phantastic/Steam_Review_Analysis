@@ -143,11 +143,12 @@ Both models aid in our goal in this project of identifying potential contributio
 The linear regression model achieved consistent performance across multiple runs, with training RMSE values averaging around 0.0679 and testing RMSE values averaging around 0.0678. This seemed to indicate that the model is not overfitting and generalizes well to unseen data within the current feature set. However, upon further analysis, it can be seen that the model is predicting extremely close to the average for every value and managed to achieve a low RMSE through underfitting. Although the model performed reasonably well, it is clear that the underfitting must be addressed in order to build an accurate and useful model that suits our purposes. Ways to improve its performance include incorporating additional features such as text-based sentiment analysis, tuning hyperparameters by exploring methods such as cross-validation, and applying target transformations such as log scale. 
 
 ---
-
-## Team Members
+## Statement of Collaboration
+### Team Members
 * Danny Xia ([@dannyxia7](https://github.com/dannyxia7))
 * Khanh Phan ([@khp023](https://github.com/k-phantastic))
 * Layth Marabeh ([@lmarabeh](https://github.com/lmarabeh))
+Met in group meetings once/twice per week to discuss progress updates, solve bugs, suggest additions to be made in the code and README. Helped in coding a few of the preprocessing steps such as filtering by weighted vote score and dropping unnecessary columns. Is responsible for the coding of model 1 and writing the majority of the Milestone 3 README.
 
 ## Sources
 * [100 Million+ Steam Reviews | Kaggle](https://www.kaggle.com/datasets/kieranpoc/steam-reviews/data)
