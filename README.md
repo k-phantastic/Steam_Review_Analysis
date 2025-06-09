@@ -17,8 +17,8 @@ Summary of the column labels and features can be found in [DATA_LABELS.md](/reso
 With the prerequisite usage of SDSC Expanse the following were key parameters outside of performance ([reference class setup](https://github.com/ucsd-dsc232r/group-project)): 
 * Singularity Image File Location (course's singularity image): `~/esolares/spark_py_latest_jupyter_dsc232r.sif` 
 * Environment Modules to be loaded: `singularitypro`
-* Cores: 30
-* Memory per node (gb): 80 
+* Cores: 32
+* Memory per node (gb): 128
 * Working directory: home
 * Type: JupyterLab
 
@@ -159,7 +159,8 @@ The above figure depicts the first 100 values of the ground truth with its corre
 
 The linear regression model achieved consistent performance across multiple runs, with training RMSE values converging to around 0.0679 and test RMSE values converging to around 0.0677. We can see that the improvement in the RMSEs seems to drop off around 4 or 5 features, and this finding is in line with the rank and RMSE reduction of each feature. So for our model selection, to avoid overfitting, we should choose a model using the top 4 or 5 features for the best performance.
 
-## Model 1 Discussion: Improvements and Next Models
+## Model 1 Discussion:
+
 
 ##### Figure 8
 ![Figure 8](/resources/screenshots/pred_overlay.png)
