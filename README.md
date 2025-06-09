@@ -90,7 +90,7 @@ General statistics and visualizations shown from clean data, used to brainstorm 
 
 ---
 
-## Model 1 Overview: Helpfulness Score Regression (Milestone 3)
+# Model 1 Overview: Helpfulness Score Regression (Milestone 3)
 
 > Key Files: [Model 1 Notebook](/notebooks/NB4_Model_1.ipynb), used in conjunction with the [cleaned data set](https://drive.google.com/file/d/12S7orw3WFnilznJpWCwaLdhBPNwHmMcu/view?usp=sharing) (obtained following initial [cleanup](/notebooks/NB0_Original_Sampled_Data.ipynb))
 
