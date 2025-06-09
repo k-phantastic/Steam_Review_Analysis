@@ -1,5 +1,8 @@
 # Steam Review Analysis
 
+## Introduction
+We chose this dataset because all of us happened to be avid gamers, so we naturally had an interest in the topic. For the dataset itself, there was a sufficient amount of data with more than enough attributes to have a lot of options for creating models. This includes how we would pre-process the data, which attributes to use, the purpose of our model, and the actual type of model itself. In terms of having a good predictive mode, our model predicting the helpfulness of user reviews can be helpful for highlighting the most relevant reviews when users are thinking about buying a game, thus boosting sales, or it could give insight into the most common sentiments on the pros and cons of the game, thus allowing developers to target aspects of their game that they can improve.  
+
 ## Overview
 
 In this project we will examine a dataset containing more than 100 million Steam reviews and attempt to create two machine learning models: one to predict the helpfulness of user reviews, and the other to create distinct clusters of Steam reviewers. 
@@ -110,28 +113,61 @@ Ground truth: weighted_vote_score
 The above figure depicts the first 100 values of the ground truth with its corresponding index. 
 
 ## Results 
-Train error Vs Test error across train/test splits:
+#### 🔍 Feature Importance Ranking
 
-Training RMSE values: `[0.06780513676116458, 0.06809054266893783, 0.06793147050810851, 0.06786924970348243, 0.06783383929472699]`
+| Rank | Feature                          | RMSE Reduction   |
+|------|----------------------------------|------------------|
+| 1    | `votes_up`                       | 0.2027           |
+| 2    | `voted_up`                       | 0.1329           |
+| 3    | `votes_funny`                    | 0.1186           |
+| 4    | `comment_count`                  | 0.0695           |
+| 5    | `author_num_reviews`             | 0.0669           |
+| 6    | `author_num_games_owned`         | 0.0304           |
+| 7    | `author_playtime_at_review`      | 0.0170           |
+| 8    | `steam_purchase`                 | 0.0165           |
+| 9    | `author_playtime_forever`        | 0.0146           |
+| 10   | `written_during_early_access`    | 0.0076           |
+| 11   | `received_for_free`              | 0.0054           |
+| 12   | `author_playtime_last_two_weeks` | 0.0053           |
+| 13   | `author_last_played`             | 0.0025           |
 
-Testing RMSE values: `[0.0677858225116503, 0.06795994752549109, 0.06785859680397434, 0.06774141874455455, 0.06766356133129071]`
+**Recommended number of features (elbow point):** 4 or 5  
+**Selected features:** `votes_up`, `voted_up`, `votes_funny`, `comment_count`, 'author_num_reviews'
+
+---
+
+#### 📈 Performance Summary (Forward Feature Selection)
+
+| Features Used | Test RMSE | Improvement |
+|---------------|-----------|-------------|
+| 1             | 0.0693    | 0.0000      |
+| 2             | 0.0684    | 0.0009      |
+| 3             | 0.0682    | 0.0011      |
+| 4             | 0.0681    | 0.0012      |
+| 5             | 0.0679    | 0.0014      |
+| 6             | 0.0678    | 0.0015      |
+| 7             | 0.0678    | 0.0015      |
+| 8             | 0.0678    | 0.0015      |
+| 9             | 0.0678    | 0.0015      |
+| 10            | 0.0677    | 0.0015      |
+| 11            | 0.0677    | 0.0015      |
+| 12            | 0.0677    | 0.0015      |
+| 13            | 0.0677    | 0.0015      |
 
 ##### Figure 7
 ![Figure 7](/resources/screenshots/rmse_features.png)
 
-As can be seen by the graph above, train and test error are similar across all the train/test splits. This seems to indicate that the model is neither overfitting nor underfitting.
+The linear regression model achieved consistent performance across multiple runs, with training RMSE values converging to around 0.0679 and test RMSE values converging to around 0.0677. We can see that the improvement in the RMSEs seems to drop off around 4 or 5 features, and this finding is in line with the rank and RMSE reduction of each feature. So for our model selection, to avoid overfitting, we should choose a model using the top 4 or 5 features for the best performance.
 
 ## Model 1 Discussion: Improvements and Next Models
 
 ##### Figure 8
 ![Figure 8](/resources/screenshots/pred_overlay.png)
 
-However, the figure above, an overlay of the first 100 ground truths and the first 100 predictions of the 80/20 train-test split, shows that the model is actually underfitting and needs tuning in order to properly and accurately predict the weighted_vote_score.
+In the figure above, an overlay of the first 100 ground truths and the first 100 predictions of the 80/20 train-test split, suggests that the model may actually be underfitting and may need tuning in order to properly and accurately predict the weighted_vote_score.
 
-The linear regression model achieved consistent performance across multiple runs, with training RMSE values averaging around 0.0679 and testing RMSE values averaging around 0.0678. This seemed to indicate that the model is not overfitting and generalizes well to unseen data within the current feature set. However, upon further analysis, it can be seen that the model is predicting extremely close to the average for every value and managed to achieve a low RMSE through underfitting. Although the model performed reasonably well, it is clear that the underfitting must be addressed in order to build an accurate and useful model that suits our purposes.
-
-### Model 1 Conclusion
-Ways to improve its performance include incorporating additional features such as text-based sentiment analysis, tuning hyperparameters by exploring methods such as cross-validation, and applying target transformations such as log scale. 
+## Model 1 Conclusion
+There are multiple potential ways to improve the model performance, including incorporating additional features such as text-based sentiment analysis, tuning hyperparameters by exploring methods such as cross-validation, and applying target transformations such as log scale. 
 
 * Reducing regularization may assist in preserving the real signal in our chosen features to survive.
 * Incorporating additional features such as text-based sentiment analysis.
@@ -148,10 +184,10 @@ Both models aid in our goal in this project of identifying potential contributio
 ---
 ## Statement of Collaboration
 Layth Marabeh: Coder/Writer
-* Met in group meetings once/twice per week to discuss progress updates, solve bugs, suggest additions to be made in the code and README. Helped in coding a few of the preprocessing steps such as filtering by weighted vote score and dropping unnecessary columns. Is responsible for the coding of model 1 and writing the majority of the Milestone 3 README.
+* He participated in group meetings once/twice per week to discuss progress updates, solve bugs, suggest additions to be made in the code and README. He wrote most of the code for Milestone 3 data pre-processing, such as scaling the data, imputing the data, encoding the data, feature expansion, filtering by weighted vote score, and dropping unnecessary columns. He is also responsible for the coding of model 1 and writing the majority of the Milestone 3 README.
 
 Danny Xia
-* He wrote or edited many of the written documents, including the abstract from milestone 2 and the final written report/README.md. He also created data visualizations as part of the data exploration milestone and conceptualized the idea for the models. Finally, he wrote and edited the code for finding the best features and models for the linear regression model and creating the plots that compared the train RMSE and test RMSE in relation to the number of features. He collaborated with group members in meetings to discuss progress updates and provide suggestions on best approach to solving objectives from the milestones.
+* He wrote or edited many of the written documents, including the abstract from Milestone 2 and the final written report/README.md. He also created data visualizations as part of the data exploration milestone and conceptualized the idea for the models. Finally, he wrote and edited the code for finding the best features and models for the linear regression model and creating the plots that compared the train RMSE and test RMSE in relation to the number of features. He collaborated with group members in meetings to discuss progress updates and provide suggestions on the best approaches to solving the objectives from the milestones.
 ## Team Members
 * Danny Xia ([@dannyxia7](https://github.com/dannyxia7))
 * Khanh Phan ([@khp023](https://github.com/k-phantastic))
