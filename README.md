@@ -160,7 +160,7 @@ The above figure depicts the first 100 values of the ground truth with its corre
 The linear regression model achieved consistent performance across multiple runs, with training RMSE values converging to around 0.0679 and test RMSE values converging to around 0.0677. We can see that the improvement in the RMSEs seems to drop off around 4 or 5 features, and this finding is in line with the rank and RMSE reduction of each feature. So for our model selection, to avoid overfitting, we should choose a model using the top 4 or 5 features for the best performance.
 
 ## Model 1 Discussion:
-
+The goal in using a Linear Regression model was to leverage the number of numeric columns in the data set and make good use of what was already provided. The initial assumption was that the numerical features included in the data set held more weight in deciding the weighted vote score than any of the text columns, resulting in training the model on these features alone. Evaluating the model on 5 different train-test splits was a design that was intended to test for overfitting and at what point it occurred. The RMSE for all of the train-test splits being almost the same was promising at first; however, it was clear that the issue wasn't overfitting but rather underfitting. This was made clear by the figure below. As mentioned in a previous submission, the next step was to utilize the text features and possibly use a log scale for the numeric features used in an attempt to have the model accurately predict the weighted vote score rather than predicting the average and achieving a low RMSE through underfitting.
 
 ##### Figure 8
 ![Figure 8](/resources/screenshots/pred_overlay.png)
@@ -185,7 +185,7 @@ Both models aid in our goal in this project of identifying potential contributio
 ---
 ## Statement of Collaboration
 Layth Marabeh: Coder/Writer
-* He participated in group meetings once/twice per week to discuss progress updates, solve bugs, suggest additions to be made in the code and README. He wrote most of the code for Milestone 3 data pre-processing, such as scaling the data, imputing the data, encoding the data, feature expansion, filtering by weighted vote score, and dropping unnecessary columns. He is also responsible for the coding of model 1 and writing the majority of the Milestone 3 README.
+* He participated in group meetings once/twice per week to discuss progress updates, solve bugs, suggest additions to be made in the code and README. He wrote most of the code for Milestone 3 data pre-processing, such as scaling the data, imputing the data, encoding the data, feature expansion, filtering by weighted vote score, and dropping unnecessary columns. He is also responsible for the coding of model 1 along with all the figures that coincide and writing the majority of the Milestone 3 README.
 
 Danny Xia
 * He wrote or edited many of the written documents, including the abstract from Milestone 2 and the final written report/README.md. He also created data visualizations as part of the data exploration milestone and conceptualized the idea for the models. Finally, he wrote and edited the code for finding the best features and models for the linear regression model and creating the plots that compared the train RMSE and test RMSE in relation to the number of features. He collaborated with group members in meetings to discuss progress updates and provide suggestions on the best approaches to solving the objectives from the milestones.
